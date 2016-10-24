@@ -26,9 +26,9 @@
 (display (list x y))
 (newline)
 ;; exercise 2.18
-(define (revers iterms)
+(define (reverse items)
   (if (null? (cdr(cdr items)))
-             (cons(car(cdr(items)) (cons(car(items))'())))
-             (cons (reverse (cdr items)) (cons(car items)'()))))
+             (cons(car(cdr items))(cons(car items )'()))
+             (append (reverse (cdr items)) (cons(car items)'()))))
 ;; exercise 2.27
 
