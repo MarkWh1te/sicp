@@ -1,10 +1,12 @@
 #lang sicp
+
 ;; book example
 (define (enumerate-interval low high)
   (if (> low high)
       nil
       (cons low (enumerate-interval (+ low 1) high))))
 ;; (display (enumerate-interval 1 10))
+
 ;; filter
 (define (filter predicate sequence)
   (cond ((null? sequence) nil)
@@ -12,7 +14,8 @@
          (cons (car sequence)
                (filter predicate (cdr sequence))))
         (else (filter predicate (cdr sequence)))))
-;; accumulate(reduce in Python)
+
+;; accumulate
 (define (accumulate op initial sequence)
   (if (null? sequence)
       initial
@@ -32,6 +35,7 @@
                       (map fib
                            (enumerate-interval 0 n)))))
 ;; (display (even-fib 10))
+
 ;; exercise 2.33
 ;; ((lambda (x y) (+ ( * 2 x) y))1 10)
 (define (map p sequence)
@@ -39,4 +43,25 @@
               nil
               sequence))
 ;; (display (map fib (list 1 3 43 545 6)))
-;; (define (appdend ))
+(define (append seq1 seq2)
+  (accumulate cons seq2 seq1))
+;; (display (append (list 1 2)(list 3 4)))
+(define (length sequence)
+  (accumulate (lambda (x y)(+ 1 y)) 0 sequence))
+;; (display (length (list 1 2 3 4)))
+
+;; exercise 2.34
+(define (horner-eval x coefficient-sequence)
+  (accumulate (lambda (this-coeff higher-term)(+ this-coeff (* higher-term x)))
+              0
+              coefficient-sequence))
+;; (display (horner-eval 2 (list 1 3 0 5 0 1)))
+
+;; exercise 2.35
+;; (define (count-leaves t)
+;;   (accumulate + 0 (map () ())))
+
+
+
+
+
