@@ -38,11 +38,11 @@
 
 ;; exercise 2.33
 ;; ((lambda (x y) (+ ( * 2 x) y))1 10)
-(define (map p sequence)
+(define (map-new p sequence)
   (accumulate (lambda (x y)(cons (p x) y))
               nil
               sequence))
-;; (display (map fib (list 1 3 43 545 6)))
+;; (display (map-new fib (list 1 3 43 545 6)))
 (define (append seq1 seq2)
   (accumulate cons seq2 seq1))
 ;; (display (append (list 1 2)(list 3 4)))
@@ -80,13 +80,17 @@
 (define (dot-product v w)
   (accumulate + 0 (map * v w)))
 (define a (list 1 2 3))
-(define b (list 1 2 3))
+(define b (list 4 5 6))
+(define c (list (list 1 1 1)(list 2 2 2)(list 3 3 3)))
 ;; (dot-product a b)
 
 (define (maxtrix-*-vector m v)
-    (map
-    (lambda (matrix)(accumulate + 0 (accumulate-n * v matrix)))
-     m))
+  (map
+    (lambda (matrix-row) (accumulate + 0 (map * v matrix-row)))
+    m))
+;; (display (maxtrix-*-vector c a))
+
+
 
 
 
