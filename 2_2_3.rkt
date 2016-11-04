@@ -58,10 +58,35 @@
 ;; (display (horner-eval 2 (list 1 3 0 5 0 1)))
 
 ;; exercise 2.35
-;; (define (count-leaves t)
-;;   (accumulate + 0 (map () ())))
+(define (count-leaves t)
+  (accumulate + 0 (map (lambda (x)
+                         (if (pair? x)
+                             (count-leaves x)
+                             1))
+                       t)))
+;; (define tree (list 1 2 (list 3 4) (list 5 (list 6 7))))
+;; (display (count-leaves tree))
+;; exercise 2.36
+(define (accumulate-n op init seqs)
+  (if(null? (car seqs))
+     nil
+     (cons (accumulate op init (map car seqs))
+           (accumulate-n op init (map cdr seqs)))))
 
+;; (define s (list (list 1 2 3)(list 4 5 6)(list 7 8 9)))
+;; (display(accumulate-n + 0 s))
 
+;; exercise 2.37 basic matrix and vector operations
+(define (dot-product v w)
+  (accumulate + 0 (map * v w)))
+(define a (list 1 2 3))
+(define b (list 1 2 3))
+;; (dot-product a b)
+
+(define (maxtrix-*-vector m v)
+    (map
+    (lambda (matrix)(accumulate + 0 (accumulate-n * v matrix)))
+     m))
 
 
 
