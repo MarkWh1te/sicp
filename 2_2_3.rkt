@@ -103,4 +103,32 @@
 ;; (display (maxtrix-*-maxtrix c c))
 ;; (display (maxtrix-*-maxtrix e d))
 
+;; exercise 2.38
+(define (fold-left op initial sequence)
+  (define (iter result rest)
+    (if (null? rest)
+        result
+        (iter (op result (car rest))
+              (cdr rest))))
+  (iter initial sequence))
+(display (accumulate / 1 (list 1 2 3)))
+(newline)
+(display (fold-left / 1 (list 1 2 3)))
+(newline)
+(display (accumulate list nil (list 1 2 3)))
+(newline)
+(display (fold-left list  nil (list 1 2 3)))
+(newline)
+(display (accumulate + 0 (list 1 2 3)))
+(newline)
+(display (fold-left + 0 (list 1 2 3)))
+(newline)
+
+;; exercise 2.39
+(define (reverse-r sequence)
+  (accumulate (lambda (x y) (append y (list x))) nil sequence))
+(display (reverse-r (list 1 2 3)))
+(define (reverse-l sequence)
+  (fold-left (lambda (x y) (y x)) nil sequence))
+;; (display (reverse-l (list 1 2 3)))
 
