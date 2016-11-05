@@ -79,9 +79,9 @@
 ;; exercise 2.37 basic matrix and vector operations
 (define (dot-product v w)
   (accumulate + 0 (map * v w)))
-(define a (list 1 2 3))
-(define b (list 4 5 6))
-(define c (list (list 1 1 1)(list 2 2 2)(list 3 3 3)))
+;; (define a (list 1 2 3))
+;; (define b (list 4 5 6))
+;; (define c (list (list 1 1 1)(list 2 2 2)(list 3 3 3)))
 ;; (dot-product a b)
 
 (define (maxtrix-*-vector m v)
@@ -95,6 +95,12 @@
 ;; (display c)
 ;; (display (transpose c))
 
-
+(define (maxtrix-*-maxtrix m n)
+  (let((cols (transpose n)))
+    (map (lambda (mat) (maxtrix-*-vector cols mat)) m)))
+;; (define e (list(list 1 2 3)(list 4 5 6)))
+;; (define d (list(list 7 8)(list 9 10)(list 11 12)))
+;; (display (maxtrix-*-maxtrix c c))
+;; (display (maxtrix-*-maxtrix e d))
 
 
