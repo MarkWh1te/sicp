@@ -90,6 +90,10 @@
     m))
 ;; (display (maxtrix-*-vector c a))
 
+(define (transpose mat)
+  (accumulate-n cons nil mat))
+;; (display c)
+;; (display (transpose c))
 
 
 
