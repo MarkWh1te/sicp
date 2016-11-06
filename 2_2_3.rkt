@@ -132,3 +132,29 @@
   (fold-left (lambda (x y) (y x)) nil sequence))
 ;; (display (reverse-l (list 1 2 3)))
 
+;; nested mapping
+(define (flatmap proc seq)
+  (accumulate append nil (map proc seq)))
+(define (showall n)
+  (flatmap (lambda (i) (map (lambda (j) (list i j))
+                            (enumerate-interval 1 (- i 1))))
+           (enumerate-interval 1 n)))
+;; (newline)
+;; (display (showall 4))
+;; (newline)
+(define (remove item sequence)
+  (filter (lambda (x) (not (= x item)))
+          sequence))
+(define (permutations s)
+  (if(null? s)
+     (list nil)
+     (flatmap (lambda (x)
+                (map (lambda (p) (cons x p))
+                     (permutations (remove x s))))
+              s)))
+;; (display (permutations (list 1 2 3 )))
+
+
+
+
+
